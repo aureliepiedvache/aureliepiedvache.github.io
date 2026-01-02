@@ -5,20 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baby Recipes for 13-Month-Old</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; color: #333; }
-        h1 { color: #4CAF50; }
-        .recipe { background-color: #f9f9f9; border-radius: 5px; padding: 15px; margin-bottom: 20px; }
-        .ingredients { margin: 10px 0; }
-        .instructions { margin: 10px 0; }
-        .note { font-style: italic; color: #666; }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .search-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        #search {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .recipe {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .ingredients {
+            margin: 10px 0;
+        }
+        .instructions {
+            margin: 10px 0;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+        }
+        .recipe-title {
+            color: #4CAF50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>Baby Recipes for 13-Month-Old</h1>
     <p>Balanced recipes following Japanese nutrient guidelines for a 13-month-old baby.</p>
 
-    <div class="recipe">
-        <h2>1. Soft Rice and Vegetable Mix</h2>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search by ingredient (e.g. rice, fish, banana)...">
+    </div>
+
+    <div class="recipe" data-ingredients="rice, carrot, spinach">
+        <h2 class="recipe-title">1. Soft Rice and Vegetable Mix</h2>
         <div class="ingredients">
             <strong>Ingredients:</strong>
             <ul>
@@ -39,8 +83,8 @@
         <p class="note">Rich in iron and vitamins.</p>
     </div>
 
-    <div class="recipe">
-        <h2>2. Sweet Potato and White Fish Stew</h2>
+    <div class="recipe" data-ingredients="sweet potato, fish">
+        <h2 class="recipe-title">2. Sweet Potato and White Fish Stew</h2>
         <div class="ingredients">
             <strong>Ingredients:</strong>
             <ul>
@@ -60,8 +104,8 @@
         <p class="note">Good source of protein and fiber.</p>
     </div>
 
-    <div class="recipe">
-        <h2>3. Banana and Yogurt Dessert</h2>
+    <div class="recipe" data-ingredients="banana, yogurt">
+        <h2 class="recipe-title">3. Banana and Yogurt Dessert</h2>
         <div class="ingredients">
             <strong>Ingredients:</strong>
             <ul>
@@ -80,6 +124,23 @@
         <p class="note">Rich in calcium and potassium.</p>
     </div>
 
-    <p>These recipes are designed to meet the nutritional needs of a 13-month-old baby. Adjust according to allergies or preferences.</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBar = document.getElementById('search');
+            const recipes = document.querySelectorAll('.recipe');
+
+            searchBar.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                recipes.forEach(recipe => {
+                    const ingredients = recipe.getAttribute('data-ingredients').toLowerCase();
+                    if (ingredients.includes(searchTerm)) {
+                        recipe.style.display = 'block';
+                    } else {
+                        recipe.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
